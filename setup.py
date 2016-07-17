@@ -64,7 +64,7 @@ setup(
     long_description=(
         read('README.rst') + '\n\n' + read('CHANGES.rst')
     ),
-    keywords='',
+    keywords='tests py.test pytest fixture mongo mongodb',
     author='Clearcode - The A Room',
     author_email='thearoom@clearcode.cc',
     url='https://github.com/ClearcodeHQ/pytest-mongo',
