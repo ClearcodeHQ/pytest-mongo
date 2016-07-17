@@ -38,7 +38,11 @@ def read(fname):
     return open(os.path.join(here, fname)).read()
 
 requirements = [
-    'pymongo'
+    'pytest',
+    'pymongo',
+    'path.py',
+    'mirakuru',
+    'port-for'
 ]
 
 test_requires = [
@@ -61,7 +65,7 @@ setup(
     keywords='',
     author='Clearcode - The A Room',
     author_email='thearoom@clearcode.cc',
-    url='https://github.com/ClearcodeHQ/pytest_mongo',
+    url='https://github.com/ClearcodeHQ/pytest-mongo',
     license='LGPL',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
