@@ -1,28 +1,28 @@
 language: python
 python:
-    - "2.7"
-    - "3.3"
-    - "3.4"
-    - "3.5"
-    - "pypy"
-    - "pypy3"
+- '2.7'
+- '3.3'
+- '3.4'
+- '3.5'
+- pypy
+- pypy3
 install:
-    - "pip install -r requirements-test.txt"
-    - "python setup.py develop"
-    - "pip install pytest_mongo[tests] coveralls wheel"
+- pip install -r requirements-test.txt
+- python setup.py develop
+- pip install pytest_mongo[tests] coveralls wheel
 script:
-    - "py.test -v --cov pytest_mongo tests/"
-    - "pylama"
-    - "pyroma ."
+- py.test -v --cov pytest_mongo tests/
+- pylama
+- pyroma .
 after_success:
-    - coveralls
+- coveralls
 deploy:
-    provider: pypi
-    user: thearoom
-    password:
-        secure: "run travis encrypt --add deploy.password"
-    on:
-        tags: true
-        all_branches: true
-        repo: ClearcodeHQ/pytest_mongo
-    distributions: "sdist bdist_wheel"
+  provider: pypi
+  user: thearoom
+  password:
+    secure: oxdBH/aU1r7BlcaHi0MZF0SqexbNkooKtT22dKZgxPFG8neL3yRVhUMoX0UHpNxhaxbB6rxqzMFNvih1Zxh8H6DSlk7M+1l4ECdTQm7DAUNxymN0olPP6goKp4i2Mg3m5aYjDl4ENJZmOGvNzq5OPL4xcRsj4m0eHv3UbNnuxkFDlS00c0PCpCC5O5qiB5KyaIkJzE4aVePGrtKkQVmlrRlem9JR+NN9CS24TiyFUIxcMfvMpvrAmYPy4i/GdcGZ0I+8SBlkOSEx/jlPYoTC+9Zf6rgzKGbZqpH9IMKwA4cjsU9AyCRosi/3SOklnAHkt8go0PAEPWXP0AIXn03bySBSeGUPrfeh8Gjr2DTbkX946pvsQnUvnnBNpv3NssLC7CBB722M6M2rQOTauMMKhxyTBSlAMofrevwVMdwo/2HIRDt4h/VpY6ff1MY7ePD/Oo7BY1+pNtf3xOAe0c2ml9nuNzs7qtwgNeaJxgCApnoVt0U7ru7SkogwrbCNLRQF2zYVCWiIX3CqrtcrVni/Ul1jhkYxvjAkaSvnhQkk7EMFZC5R7oLAvoFin+eGUR0YtGU2/TTW+6JpVNP4yOKmnd/HdzRDuALM5geGMxxLWppmySSRWxcR/hyN/dM8+hVJqDU8drWOkrAGz/XxsivJKyXtqAi9tyzKBLgHdqqYaYU=
+  on:
+    tags: true
+    all_branches: true
+    repo: ClearcodeHQ/pytest_mongo
+  distributions: sdist bdist_wheel
