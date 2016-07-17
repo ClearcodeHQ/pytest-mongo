@@ -37,7 +37,9 @@ def read(fname):
     """
     return open(os.path.join(here, fname)).read()
 
-requirements = []
+requirements = [
+    'pymongo'
+]
 
 test_requires = [
     'pytest',

@@ -16,7 +16,6 @@ script:
     - "pyroma ."
 after_success:
     - coveralls
-
 deploy:
     provider: pypi
     user: thearoom

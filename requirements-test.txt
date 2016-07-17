@@ -6,3 +6,8 @@ pep257==0.7.0
 pep8==1.7.0
 mccabe==0.5.0
 pyroma==2.0.2
+mirakuru==0.8.2
+path.py==8.2.1
+port-for==0.3.1
+pymongo==3.3.0
+pytest==2.9.2
