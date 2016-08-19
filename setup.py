@@ -42,14 +42,15 @@ def read(fname):
 requirements = [
     'pytest',
     'pymongo',
-    'path.py',
+    'path.py>=6.2',
     'mirakuru',
     'port-for'
 ]
 
 test_requires = [
     'pytest',
-    'pytest-cov'
+    'pytest-cov==2.3.1',
+    'pytest-xdist==1.15.0'
 ]
 
 extras_require = {
@@ -90,4 +91,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     extras_require=extras_require,
+    entry_points={
+        'pytest11': [
+            'pytest_mongo = pytest_mongo.plugin'
+        ]},
 )
