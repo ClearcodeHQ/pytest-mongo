@@ -6,12 +6,16 @@ python:
 - '3.5'
 - pypy
 - pypy3
+env:
+- XDIST=1
+# unfortunatelly, xdist hangs if there's any error in the slave threads, and there, pytest fires all the hooks
+- XDIST=0
 install:
 - pip install -r requirements-test.txt
-- python setup.py develop
+- python setup.py install
 - pip install pytest_mongo[tests] coveralls wheel
 script:
-- py.test -v --cov pytest_mongo tests/
+- py.test -n $XDIST --showlocals --verbose --cov pytest_mongo tests
 - pylama
 - pyroma .
 after_success:
