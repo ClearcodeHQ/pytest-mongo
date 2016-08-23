@@ -1,6 +1,8 @@
 CHANGELOG
 =========
 
-0.0.0
+unreleased
 -------
-- Created the pytest-mongo [by Clearcode - The A Room]
+
+- [feature] run on random port by default (easier xdist integration)
+- [feature] add command line and ini option for: executable, host, port, params and logsdir

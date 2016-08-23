@@ -19,15 +19,80 @@
 """Pytest-mongo plugin definition."""
 from pytest_mongo import factories
 
+_help_executable = 'Path to MongoDB executable'
+_help_logsdir = 'Path to logs directory'
+_help_params = 'Additional MongoDB parameters'
+_help_host = 'Host at which MongoDB will accept connections'
+_help_port = 'Port at which MongoDB will accept connections'
+
 
 def pytest_addoption(parser):
     """Configure pytest-mongo configuration options."""
+    parser.addini(
+        name='mongo_exec',
+        help=_help_executable,
+        default='/usr/bin/mongod'
+    )
+
+    parser.addini(
+        name='mongo_params',
+        help=_help_params,
+        default=''
+    )
+
+    parser.addini(
+        name='mongo_logsdir',
+        help=_help_logsdir,
+        default='/tmp'
+    )
+
+    parser.addini(
+        name='mongo_host',
+        help=_help_host,
+        default='127.0.0.1'
+    )
+
+    parser.addini(
+        name='mongo_port',
+        help=_help_port,
+        default=None,
+    )
+
+    parser.addoption(
+        '--mongo-exec',
+        action='store',
+        metavar='path',
+        dest='mongo_exec',
+        help=_help_executable
+    )
+
+    parser.addoption(
+        '--mongo-params',
+        action='store',
+        dest='mongo_params',
+        help=_help_params
+    )
+
     parser.addoption(
         '--mongo-logsdir',
         action='store',
-        default='/tmp',
         metavar='path',
         dest='mongo_logsdir',
+        help=_help_logsdir
+    )
+
+    parser.addoption(
+        '--mongo-host',
+        action='store',
+        dest='mongo_host',
+        help=_help_host,
+    )
+
+    parser.addoption(
+        '--mongo-port',
+        action='store',
+        dest='mongo_port',
+        help=_help_port
     )
 
 
