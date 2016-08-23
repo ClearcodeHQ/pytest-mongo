@@ -16,20 +16,32 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with pytest-mongo.  If not, see <http://www.gnu.org/licenses/>.
 """Fixture factories."""
-import pytest
+from tempfile import gettempdir
 
+import pytest
 import pymongo
 from path import Path
-from tempfile import mkdtemp
 from mirakuru import TCPExecutor
 
 from pytest_mongo.port import get_port
 
 
+def get_config(request):
+    """Return a dictionary with config options."""
+    config = {}
+    options = ['exec', 'host', 'port', 'params', 'logsdir']
+    for option in options:
+        option_name = 'mongo_' + option
+        conf = request.config.getoption(option_name) or \
+            request.config.getini(option_name)
+        config[option] = conf
+    return config
+
+
 def mongo_proc(
-        executable='/usr/bin/mongod', params='',
-        host='127.0.0.1', port=None,
-        logs_prefix=''
+        executable=None, params=None,
+        host=None, port=-1,
+        logsdir=None
 ):
     """
     Mongo process fixture factory.
@@ -46,7 +58,7 @@ def mongo_proc(
         [(2000,3000)] or (2000,3000) - random available port from a given range
         [{4002,4003}] or {4002,4003} - random of 4002 or 4003 ports
         [(2000,3000), {4002,4003}] -random of given range and set
-    :param str logs_prefix: prefix for log filename
+    :param str logsdir: path to store log files.
     :rtype: func
     :returns: function which makes a mongo process
     """
@@ -59,28 +71,37 @@ def mongo_proc(
         :rtype: mirakuru.TCPExecutor
         :returns: tcp executor
         """
-        tmpdir = Path(mkdtemp(prefix='mongo_pytest_fixture'))
-        request.addfinalizer(lambda: tmpdir.exists() and tmpdir.rmtree())
+        config = get_config(request)
+        tmpdir = Path(gettempdir())
 
-        mongo_exec = executable
-        mongo_params = params
+        mongo_exec = executable or config['exec']
+        mongo_params = params or config['params']
 
-        mongo_host = host
-        mongo_port = get_port(port)
+        mongo_host = host or config['host']
+        mongo_port = get_port(port) or get_port(config['port'])
 
-        logsdir = Path(request.config.getvalue('mongo_logsdir'))
-        mongo_logpath = logsdir / '{prefix}mongo.{port}.log'.format(
-            prefix=logs_prefix,
+        mongo_logsdir = Path(logsdir or config['logsdir'])
+        mongo_logpath = Path(mongo_logsdir) / 'mongo.{port}.log'.format(
             port=mongo_port
+        )
+        mongo_db_path = tmpdir / 'mongo.{port}'.format(
+            port=mongo_port
+        )
+        mongo_db_path.mkdir()
+        request.addfinalizer(
+            lambda: mongo_db_path.exists() and mongo_db_path.rmtree()
         )
 
         mongo_executor = TCPExecutor(
-            '{mongo_exec} --bind_ip {host} --port {port} --dbpath {dbpath} --logpath {logpath} {params}'.format(  # noqa
+            (
+                '{mongo_exec} --bind_ip {host} --port {port}'
+                ' --dbpath {dbpath} --logpath {logpath} {params}'
+            ).format(
                 mongo_exec=mongo_exec,
                 params=mongo_params,
                 host=mongo_host,
                 port=mongo_port,
-                dbpath=tmpdir,
+                dbpath=mongo_db_path,
                 logpath=mongo_logpath,
             ),
             host=mongo_host,
