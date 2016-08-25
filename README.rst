@@ -83,7 +83,7 @@ You can pick which you prefer, but remember that these settings are handled in t
 +-----------------------+--------------------------+---------------------+-------------------+-----------------+
 | MongoDB port          | port                     | --mongo-port        | mongo_port        | random          |
 +-----------------------+--------------------------+---------------------+-------------------+-----------------+
-| Path to store logs    | logsdir                  | --mongo-logsdir     | mongo_logsdir     | /tmp            |
+| Path to store logs    | logsdir                  | --mongo-logsdir     | mongo_logsdir     | $TMPDIR         |
 +-----------------------+--------------------------+---------------------+-------------------+-----------------+
 | Additional parameters | params                   | --mongo-params      | mongo_params      |                 |
 +-----------------------+--------------------------+---------------------+-------------------+-----------------+
