@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-unreleased
+1.0.0
 -------
 
 - [feature] defaults logs dir to $TMPDIR by default
