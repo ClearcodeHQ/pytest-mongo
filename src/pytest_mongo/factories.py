@@ -127,7 +127,7 @@ def mongodb(process_fixture_name):
     @pytest.fixture
     def mongodb_factory(request):
         """
-        MongoDB client fixture.
+        Client fixture for MongoDB.
 
         :param FixtureRequest request: fixture request object
         :rtype: pymongo.connection.Connection
