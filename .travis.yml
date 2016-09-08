@@ -14,7 +14,7 @@ install:
 - python setup.py $INSTALL
 - pip install pytest_mongo[tests] coveralls wheel
 script:
-- py.test -n $XDIST --showlocals --verbose --cov src/pytest_mongo tests
+- py.test -n $XDIST --cov src/pytest_mongo tests
 - pylama
 - pyroma .
 after_success:
