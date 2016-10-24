@@ -133,7 +133,7 @@ def mongodb(process_fixture_name):
         :rtype: pymongo.connection.Connection
         :returns: connection to mongo database
         """
-        mongodb_process = request.getfuncargvalue(process_fixture_name)
+        mongodb_process = request.getfixturevalue(process_fixture_name)
         if not mongodb_process.running():
             mongodb_process.start()
 
