@@ -1,5 +1,5 @@
 """pytest-mongo tests collection."""
-from path import path
+from path import Path
 
 from pytest_mongo import factories
 
@@ -11,7 +11,7 @@ def test_mongo(mongodb):
     }
 
     db = mongodb['test_db']
-    db.test.insert(test_data)
+    db.test.insert_one(test_data)
     assert db.test.find_one()['test1'] == 'test1'
 
 
@@ -30,28 +30,28 @@ def test_third_mongo(mongodb, mongodb2, mongodb3):
         "test1": "test1",
     }
     db = mongodb['test_db']
-    db.test.insert(test_data_one)
+    db.test.insert_one(test_data_one)
     assert db.test.find_one()['test1'] == 'test1'
 
     test_data_two = {
         "test2": "test2",
     }
     db = mongodb2['test_db']
-    db.test.insert(test_data_two)
+    db.test.insert_one(test_data_two)
     assert db.test.find_one()['test2'] == 'test2'
 
     test_data_three = {
         "test3": "test3",
     }
     db = mongodb3['test_db']
-    db.test.insert(test_data_three)
+    db.test.insert_one(test_data_three)
     assert db.test.find_one()['test3'] == 'test3'
 
 
 def test_mongo_proc(mongo_proc, mongo_proc2, mongo_proc3):
     """Several mongodb processes running."""
     for m in (mongo_proc, mongo_proc2, mongo_proc3):
-        assert path('/tmp/mongo.{port}.log'.format(port=m.port)).isfile()
+        assert Path('/tmp/mongo.{port}.log'.format(port=m.port)).isfile()
 
 
 mongo_proc_rand = factories.mongo_proc(port=None, params=mongo_params)
