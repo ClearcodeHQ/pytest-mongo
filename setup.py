@@ -19,14 +19,9 @@
 """Package definition for pytest-mongo."""
 
 import os
-import re
 from setuptools import setup, find_packages
 
 here = os.path.dirname(__file__)
-with open(os.path.join(here, 'src', 'pytest_mongo', '__init__.py')) as v_file:
-    package_version = re.compile(
-        r".*__version__ = '(.*?)'", re.S
-    ).match(v_file.read()).group(1)
 
 
 def read(fname):
@@ -61,7 +56,7 @@ extras_require = {
 
 setup(
     name='pytest-mongo',
-    version=package_version,
+    version='1.1.0',
     description='MongoDB process and client fixtures plugin for py.test.',
     long_description=(
         read('README.rst') + '\n\n' + read('CHANGES.rst')
