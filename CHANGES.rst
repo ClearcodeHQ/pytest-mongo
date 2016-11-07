@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-unreleased
+1.1.1
 -------
 
 - [enhancements] set executor timeout to 60. By default mirakuru waits indefinitely, which might cause test hangs

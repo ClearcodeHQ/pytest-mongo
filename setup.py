@@ -56,7 +56,7 @@ extras_require = {
 
 setup(
     name='pytest-mongo',
-    version='1.1.0',
+    version='1.1.1',
     description='MongoDB process and client fixtures plugin for py.test.',
     long_description=(
         read('README.rst') + '\n\n' + read('CHANGES.rst')
