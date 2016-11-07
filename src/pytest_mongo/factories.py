@@ -106,6 +106,7 @@ def mongo_proc(
             ),
             host=mongo_host,
             port=mongo_port,
+            timeout=60
         )
         mongo_executor.start()
 
