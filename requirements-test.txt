@@ -10,4 +10,4 @@ mirakuru==0.8.2
 path.py==10.1
 port-for==0.3.1
 pymongo==3.4.0
-pytest==3.0.6 #  rq.filter: !=2.9.0,!=2.9.1,!=2.9.2
+pytest==3.0.7 #  rq.filter: !=2.9.0,!=2.9.1,!=2.9.2
