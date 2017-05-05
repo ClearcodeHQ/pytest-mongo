@@ -16,11 +16,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with pytest-mongo.  If not, see <http://www.gnu.org/licenses/>.
 """Fixture factories."""
+import os
+from shutil import rmtree
 from tempfile import gettempdir
 
 import pytest
 import pymongo
-from path import Path
 from mirakuru import TCPExecutor
 
 from pytest_mongo.port import get_port
@@ -72,7 +73,7 @@ def mongo_proc(
         :returns: tcp executor
         """
         config = get_config(request)
-        tmpdir = Path(gettempdir())
+        tmpdir = gettempdir()
 
         mongo_exec = executable or config['exec']
         mongo_params = params or config['params']
@@ -80,16 +81,22 @@ def mongo_proc(
         mongo_host = host or config['host']
         mongo_port = get_port(port) or get_port(config['port'])
 
-        mongo_logsdir = Path(logsdir or config['logsdir'])
-        mongo_logpath = Path(mongo_logsdir) / 'mongo.{port}.log'.format(
-            port=mongo_port
+        mongo_logsdir = logsdir or config['logsdir']
+        mongo_logpath = os.path.join(
+            mongo_logsdir,
+            'mongo.{port}.log'.format(
+                port=mongo_port
+            )
         )
-        mongo_db_path = tmpdir / 'mongo.{port}'.format(
-            port=mongo_port
+        mongo_db_path = os.path.join(
+            tmpdir,
+            'mongo.{port}'.format(
+                port=mongo_port
+            )
         )
-        mongo_db_path.mkdir()
+        os.mkdir(mongo_db_path)
         request.addfinalizer(
-            lambda: mongo_db_path.exists() and mongo_db_path.rmtree()
+            lambda: os.path.exists(mongo_db_path) and rmtree(mongo_db_path)
         )
 
         mongo_executor = TCPExecutor(

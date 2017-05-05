@@ -38,7 +38,6 @@ def read(fname):
 requirements = [
     'pytest>=3.0.0',
     'pymongo',
-    'path.py>=6.2',
     'mirakuru',
     'port-for'
 ]

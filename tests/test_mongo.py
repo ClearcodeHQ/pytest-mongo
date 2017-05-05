@@ -1,5 +1,5 @@
 """pytest-mongo tests collection."""
-from path import Path
+import os
 
 from pytest_mongo import factories
 
@@ -51,7 +51,7 @@ def test_third_mongo(mongodb, mongodb2, mongodb3):
 def test_mongo_proc(mongo_proc, mongo_proc2, mongo_proc3):
     """Several mongodb processes running."""
     for m in (mongo_proc, mongo_proc2, mongo_proc3):
-        assert Path('/tmp/mongo.{port}.log'.format(port=m.port)).isfile()
+        assert os.path.isfile('/tmp/mongo.{port}.log'.format(port=m.port))
 
 
 mongo_proc_rand = factories.mongo_proc(port=None, params=mongo_params)
