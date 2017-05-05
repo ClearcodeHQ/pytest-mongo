@@ -20,16 +20,16 @@ pytest-mongo
 Package status
 --------------
 
-.. image:: https://travis-ci.org/ClearcodeHQ/pytest-mongo.svg?branch=v1.1.1
+.. image:: https://travis-ci.org/ClearcodeHQ/pytest-mongo.svg?branch=v1.1.2
     :target: https://travis-ci.org/ClearcodeHQ/pytest-mongo
     :alt: Tests
 
-.. image:: https://coveralls.io/repos/ClearcodeHQ/pytest-mongo/badge.png?branch=v1.1.1
-    :target: https://coveralls.io/r/ClearcodeHQ/pytest-mongo?branch=v1.1.1
+.. image:: https://coveralls.io/repos/ClearcodeHQ/pytest-mongo/badge.png?branch=v1.1.2
+    :target: https://coveralls.io/r/ClearcodeHQ/pytest-mongo?branch=v1.1.2
     :alt: Coverage Status
 
-.. image:: https://requires.io/github/ClearcodeHQ/pytest-mongo/requirements.svg?tag=v1.1.1
-     :target: https://requires.io/github/ClearcodeHQ/pytest-mongo/requirements/?tag=v1.1.1
+.. image:: https://requires.io/github/ClearcodeHQ/pytest-mongo/requirements.svg?tag=v1.1.2
+     :target: https://requires.io/github/ClearcodeHQ/pytest-mongo/requirements/?tag=v1.1.2
      :alt: Requirements Status
 
 

@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-unreleased
+1.1.2
 -------
 
 - [enhancement] removed path.py depdendency
