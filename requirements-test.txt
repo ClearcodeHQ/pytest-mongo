@@ -6,7 +6,7 @@ pydocstyle==2.1.1
 pycodestyle==2.3.1
 mccabe==0.6.1
 pyroma==2.3
-mirakuru==0.8.3
+mirakuru==0.9.0
 port-for==0.4
 pymongo==3.6.1
 pytest==3.4.2 #  rq.filter: !=2.9.0,!=2.9.1,!=2.9.2
