@@ -148,25 +148,19 @@ def mongodb(process_fixture_name):
         mongo_host = mongodb_process.host
         mongo_port = mongodb_process.port
 
-        try:
-            client = pymongo.MongoClient
-        except AttributeError:
-            client = pymongo.Connection
+        client = pymongo.MongoClient
 
         mongo_conn = client(mongo_host, mongo_port)
 
-        def drop():
-            for db in mongo_conn.database_names():
-                for collection_name in mongo_conn[db].collection_names():
-                    # Do not delete any of Mongo "system" collections
-                    if not collection_name.startswith('system.'):
-                        mongo_conn[db][collection_name].drop()
+        yield mongo_conn
 
-        drop()
-
-        request.addfinalizer(drop)
-
-        return mongo_conn
+        for db_name in mongo_conn.list_database_names():
+            db = mongo_conn[db_name]
+            for collection_name in db.list_collection_names():
+                collection = db[collection_name]
+                # Do not delete any of Mongo "system" collections
+                if not collection.name.startswith('system.'):
+                    collection.drop()
 
     return mongodb_factory
 
