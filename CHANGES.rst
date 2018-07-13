@@ -1,6 +1,8 @@
 CHANGELOG
 =========
 
+- [enhancement] require at least pymongo 3.6
+
 1.1.2
 -------
 

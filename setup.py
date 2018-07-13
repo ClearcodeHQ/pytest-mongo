@@ -37,7 +37,7 @@ def read(fname):
 
 requirements = [
     'pytest>=3.0.0',
-    'pymongo',
+    'pymongo>=3.6',
     'mirakuru',
     'port-for'
 ]
