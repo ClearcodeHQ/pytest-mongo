@@ -3,7 +3,8 @@ CHANGELOG
 
 - [enhancement] require at least pymongo 3.6
 
-1.1.2
+1.2.0
+-------
 -------
 
 - [enhancement] removed path.py depdendency
