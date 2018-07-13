@@ -7,30 +7,34 @@ python:
 - '3.6'
 - pypy
 - pypy3
-env:
-- XDIST=1 INSTALL=install
-- XDIST=0 INSTALL=develop
-# blocklist branches
 branches:
   except:
   - requires-io-master
 install:
 - pip install -r requirements-test.txt
-- python setup.py $INSTALL
-- pip install pytest_mongo[tests] coveralls wheel
+- pip install -e .[tests] coveralls wheel
 script:
-- py.test -n $XDIST --cov src/pytest_mongo tests
+- py.test -n 0 --cov src/pytest_mongo tests
 - pylama
 - pyroma .
 after_success:
 - coveralls
-deploy:
-  provider: pypi
-  user: thearoom
-  password:
-    secure: POAb7CcxZBgwtEtH0MWlqnYTA1wX3ZXVOhtoVCHkhLwhRpYC54nCvVVaNq9qOgY8nYqDI3dnInPPktzbYYsstgqxftyDwzIzmu3jj+CIn0rg5qkxoDGP2n8/SwdocyKKejHlxNnfKrotsJ05hlFA4kGBGqOKCkUzoisupH2O90FPwQtgxZLBCYYgTT000gLhq97rr+4whzKXwLNZRU4QZ2XwTkasWNUo0L7BnUz+NyviVJ6kKUMSzPlKrbc6Jyh/0cfcbIqchZHArNLiNPezl0Cz7DNwsQ/+JE1ajm38xJT3czT6iKgdzJwt80BoSERDGQ0XZ2psYZB8TcXZ695V+HkhDfo9+VoIsgVy8lGzCawX9dzKg9A5fdA/CSMYwTetzxzTXo2An2o2IJdtSClaP0ZoJXDp95eJ4Molpy88xKh8gpXkndsEJejMuoZHzY/VBZXcJXhBqx8DGKl6VvAec0GmGnYKijRjw1wmugQB2BSNNWYyUbTlVhWt3DW6vEmgvgH0jFnJrpUEu/4/gcsUG6PJXtArmPKYJwtQ1JZihZW8Gtuapm1AEI9MCPfOR1cUrLjKK2WwlTucgehPn0NIUugX4wseVYjTSFOJ67C8DVMvzWGeKY4VdnyKS/L6S6Gs+lwt0QM/wCXvYHLAxFWX0NzPyWO/+UrnTJnlEBNZGGA=
-  on:
-    tags: true
-    all_branches: true
-    repo: ClearcodeHQ/pytest-mongo
-  distributions: sdist bdist_wheel
+jobs:
+  include:
+    - stage: xdist
+      python: 3.6
+      script: py.test -n 1 --cov src/pytest_mongo tests
+    - stage: deploy
+      python: 3.6
+      if: tag IS present
+      script: skip
+      deploy:
+        provider: pypi
+        user: thearoom
+        password:
+          secure: POAb7CcxZBgwtEtH0MWlqnYTA1wX3ZXVOhtoVCHkhLwhRpYC54nCvVVaNq9qOgY8nYqDI3dnInPPktzbYYsstgqxftyDwzIzmu3jj+CIn0rg5qkxoDGP2n8/SwdocyKKejHlxNnfKrotsJ05hlFA4kGBGqOKCkUzoisupH2O90FPwQtgxZLBCYYgTT000gLhq97rr+4whzKXwLNZRU4QZ2XwTkasWNUo0L7BnUz+NyviVJ6kKUMSzPlKrbc6Jyh/0cfcbIqchZHArNLiNPezl0Cz7DNwsQ/+JE1ajm38xJT3czT6iKgdzJwt80BoSERDGQ0XZ2psYZB8TcXZ695V+HkhDfo9+VoIsgVy8lGzCawX9dzKg9A5fdA/CSMYwTetzxzTXo2An2o2IJdtSClaP0ZoJXDp95eJ4Molpy88xKh8gpXkndsEJejMuoZHzY/VBZXcJXhBqx8DGKl6VvAec0GmGnYKijRjw1wmugQB2BSNNWYyUbTlVhWt3DW6vEmgvgH0jFnJrpUEu/4/gcsUG6PJXtArmPKYJwtQ1JZihZW8Gtuapm1AEI9MCPfOR1cUrLjKK2WwlTucgehPn0NIUugX4wseVYjTSFOJ67C8DVMvzWGeKY4VdnyKS/L6S6Gs+lwt0QM/wCXvYHLAxFWX0NzPyWO/+UrnTJnlEBNZGGA=
+        on:
+          tags: true
+          all_branches: true
+          repo: ClearcodeHQ/pytest-mongo
+        distributions: bdist_wheel
