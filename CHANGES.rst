@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-unreleased
+1.2.1
 -------
 
 - fix pypi description
