@@ -18,9 +18,4 @@
 # along with pytest-mongo.  If not, see <http://www.gnu.org/licenses/>.
 """pytest-mongo's main module."""
 
-import logging
-
 __version__ = '1.2.1'
-
-
-logger = logging.getLogger(__name__)

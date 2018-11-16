@@ -21,6 +21,7 @@ from tempfile import gettempdir
 
 from pytest_mongo import factories
 
+# pylint:disable=invalid-name
 _help_executable = 'Path to MongoDB executable'
 _help_logsdir = 'Path to logs directory'
 _help_params = 'Additional MongoDB parameters'

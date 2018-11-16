@@ -155,9 +155,9 @@ def mongodb(process_fixture_name):
         yield mongo_conn
 
         for db_name in mongo_conn.list_database_names():
-            db = mongo_conn[db_name]
-            for collection_name in db.list_collection_names():
-                collection = db[collection_name]
+            database = mongo_conn[db_name]
+            for collection_name in database.list_collection_names():
+                collection = database[collection_name]
                 # Do not delete any of Mongo "system" collections
                 if not collection.name.startswith('system.'):
                     collection.drop()
