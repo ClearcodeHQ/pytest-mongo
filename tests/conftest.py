@@ -8,7 +8,7 @@ if not sys.version_info >= (3, 5):
     warnings.simplefilter("error", category=DeprecationWarning)
 
 # pylint:disable=invalid-name
-mongo_params = '--nojournal --noauth --nohttpinterface --noprealloc'
+mongo_params = '--nojournal --noauth --noprealloc'
 
 mongo_proc2 = factories.mongo_proc(port=27070, params=mongo_params)
 mongodb2 = factories.mongodb('mongo_proc2')
