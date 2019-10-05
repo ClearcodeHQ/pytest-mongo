@@ -9,3 +9,4 @@ of pytest-mongo along its history.
 * Tomasz Karbownicki
 * Grzegorz Śliwiński
 * Karolina Blümke
+* Damian Skrzypczak
