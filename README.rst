@@ -1,4 +1,4 @@
-.. image:: https://raw.githubusercontent.com/ClearcodeHQ/pytest-mongo/master/logo.svg
+.. image:: https://raw.githubusercontent.com/ClearcodeHQ/pytest-mongo/master/logo.png
     :width: 100px
     :height: 100px
     
