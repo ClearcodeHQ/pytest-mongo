@@ -1,10 +1,11 @@
 dist: xenial
 language: python
 python:
-- 3.5
-- 3.6
+- 3.8
 - 3.7
-- 3.8-dev
+- 3.6
+- 3.5
+- nightly
 - pypy3
 branches:
   except:
@@ -14,16 +15,14 @@ install:
 - pip install -r requirements-test.txt
 - pip install coveralls
 script:
-- py.test -n 0 --cov src/pytest_mongo tests
+- py.test -n 0
 after_success:
 - coveralls
 jobs:
   include:
     - stage: xdist
-      python: 3.6
-      script: py.test -n 1 --cov src/pytest_mongo tests
+      script: py.test -n 1
     - stage: linters
-      python: 3.6
       install:
       - pip install -r requirements-lint.txt
       script:
@@ -33,7 +32,6 @@ jobs:
       - pyroma .
       after_success: skip
     - stage: deploy
-      python: 3.6
       if: tag IS present
       script: skip
       deploy:
