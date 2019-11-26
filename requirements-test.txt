@@ -1,9 +1,11 @@
 # test runs requirements (versions we'll be testing against) - automatically updated by requires.io
+pytest==5.3.0; python_version>'3.4'
+pytest>=4.4.0; python_version<='3.4'
+pytest-cov==2.7.1
+pytest-xdist==1.29.0
 coverage==4.5.4 # pytest-cov
 mirakuru==2.1.0; python_version>'3.5'
 mirakuru<2.1.0; python_version<='3.5'
 port-for==0.4
 pymongo==3.9.0
-pytest==5.3.0; python_version>'3.4'
-pytest>=4.4.0; python_version<='3.4' # rq.filter: <5.0.0
 -e .[tests]
