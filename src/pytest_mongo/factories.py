@@ -84,15 +84,11 @@ def mongo_proc(
         mongo_logsdir = logsdir or config['logsdir']
         mongo_logpath = os.path.join(
             mongo_logsdir,
-            'mongo.{port}.log'.format(
-                port=mongo_port
-            )
+            f'mongo.{mongo_port}.log'
         )
         mongo_db_path = os.path.join(
             tmpdir,
-            'mongo.{port}'.format(
-                port=mongo_port
-            )
+            f'mongo.{mongo_port}'
         )
         os.mkdir(mongo_db_path)
         request.addfinalizer(
@@ -101,15 +97,8 @@ def mongo_proc(
 
         mongo_executor = TCPExecutor(
             (
-                '{mongo_exec} --bind_ip {host} --port {port}'
-                ' --dbpath {dbpath} --logpath {logpath} {params}'
-            ).format(
-                mongo_exec=mongo_exec,
-                params=mongo_params,
-                host=mongo_host,
-                port=mongo_port,
-                dbpath=mongo_db_path,
-                logpath=mongo_logpath,
+                '{mongo_exec} --bind_ip {mongo_host} --port {mongo_port}'
+                ' --dbpath {mongo_db_path} --logpath {mongo_logpath} {mongo_params}'
             ),
             host=mongo_host,
             port=mongo_port,
