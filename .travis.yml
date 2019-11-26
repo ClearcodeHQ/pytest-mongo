@@ -12,7 +12,7 @@ branches:
   - /^dependabot.*$/
 install:
 - pip install -r requirements-test.txt
-- pip install -e .[tests] coveralls wheel
+- pip install coveralls
 script:
 - py.test -n 0 --cov src/pytest_mongo tests
 after_success:
@@ -26,7 +26,6 @@ jobs:
       python: 3.6
       install:
       - pip install -r requirements-lint.txt
-      - pip install .[tests]
       script:
       - pycodestyle
       - pydocstyle
