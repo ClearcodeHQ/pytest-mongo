@@ -1,7 +1,4 @@
 """Tests main conftest file."""
-import sys
-import warnings
-
 from pytest_mongo import factories
 
 # pylint:disable=invalid-name
