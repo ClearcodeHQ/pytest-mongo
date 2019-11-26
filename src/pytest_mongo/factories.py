@@ -97,8 +97,8 @@ def mongo_proc(
 
         mongo_executor = TCPExecutor(
             (
-                '{mongo_exec} --bind_ip {mongo_host} --port {mongo_port}'
-                ' --dbpath {mongo_db_path} --logpath {mongo_logpath} {mongo_params}'
+                f'{mongo_exec} --bind_ip {mongo_host} --port {mongo_port}'
+                f' --dbpath {mongo_db_path} --logpath {mongo_logpath} {mongo_params}'
             ),
             host=mongo_host,
             port=mongo_port,
