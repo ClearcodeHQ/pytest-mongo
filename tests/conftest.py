@@ -1,11 +1,5 @@
 """Tests main conftest file."""
-import sys
-import warnings
-
 from pytest_mongo import factories
-
-if not sys.version_info >= (3, 5):
-    warnings.simplefilter("error", category=DeprecationWarning)
 
 # pylint:disable=invalid-name
 mongo_params = '--nojournal --noauth --noprealloc'
