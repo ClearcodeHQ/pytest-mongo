@@ -78,19 +78,40 @@ You can pick which you prefer, but remember that these settings are handled in t
     * ``Command line option``
     * ``Configuration option in your pytest.ini file``
 
-+-----------------------+--------------------------+---------------------+-------------------+-----------------+
-| What                  | Fixture factory argument | Command line option | pytest.ini option | Default         |
-+=======================+==========================+=====================+===================+=================+
-| Path to mongodb exec  | executable               | --mongo-exec        | mongo_exec        | /usr/bin/mongod |
-+-----------------------+--------------------------+---------------------+-------------------+-----------------+
-| MongoDB host          | host                     | --mongo-host        | mongo_host        | 127.0.0.1       |
-+-----------------------+--------------------------+---------------------+-------------------+-----------------+
-| MongoDB port          | port                     | --mongo-port        | mongo_port        | random          |
-+-----------------------+--------------------------+---------------------+-------------------+-----------------+
-| Path to store logs    | logsdir                  | --mongo-logsdir     | mongo_logsdir     | $TMPDIR         |
-+-----------------------+--------------------------+---------------------+-------------------+-----------------+
-| Additional parameters | params                   | --mongo-params      | mongo_params      |                 |
-+-----------------------+--------------------------+---------------------+-------------------+-----------------+
+.. list-table:: Configuration options
+   :header-rows: 1
+
+   * - MongoDB server option
+     - Fixture factory argument
+     - Command line option
+     - pytest.ini option
+     - Default
+   * - Path to mongodb exec
+     - executable
+     - --mongo-exec
+     - mongo_exec
+     - /usr/bin/mongod
+   * - MongoDB host
+     - host
+     - --mongo-host
+     - mongo_host
+     - 127.0.0.1
+   * - MongoDB port
+     - port
+     - --mongo-port
+     - port
+     - random
+   * - Path to store logs
+     - logsdir
+     - --mongo-logsdir
+     - mongo_logsdir
+     - $TMPDIR
+   * - Additional parameters
+     - params
+     - --mongo-params
+     - mongo_params
+     -
+
 
 Example usage:
 
