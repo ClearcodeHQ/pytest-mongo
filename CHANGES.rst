@@ -4,6 +4,7 @@ CHANGELOG
 unreleased
 -------
 
+- [feature] Allow for mongo client to be configured with time zone awarness
 - [feature] Drop support for python 2.7. From now on, only support python 3.6 and up
 
 1.2.1
