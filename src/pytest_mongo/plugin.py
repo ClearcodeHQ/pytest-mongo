@@ -66,6 +66,7 @@ def pytest_addoption(parser):
         name='mongo_tz_aware',
         help=_help_tz_aware,
         type='bool',
+        default=False,
     )
 
     parser.addoption(

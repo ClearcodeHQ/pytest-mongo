@@ -137,7 +137,7 @@ def mongodb(process_fixture_name, tz_aware=None):
         mongo_tz_aware = False
         if tz_aware is not None:
             mongo_tz_aware = tz_aware
-        elif config['tz_aware'] is not None:
+        elif config['tz_aware'] is not None and isinstance(config['tz_aware'], bool):
             mongo_tz_aware = config['tz_aware']
         if not mongodb_process.running():
             mongodb_process.start()
