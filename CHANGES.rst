@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-unreleased
+2.0.0
 -------
 
 - [feature] Allow for mongo client to be configured with time zone awarness

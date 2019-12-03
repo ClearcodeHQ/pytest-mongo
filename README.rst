@@ -24,12 +24,12 @@ pytest-mongo
 Package status
 --------------
 
-.. image:: https://travis-ci.org/ClearcodeHQ/pytest-mongo.svg?branch=v1.2.1
+.. image:: https://travis-ci.org/ClearcodeHQ/pytest-mongo.svg?branch=v2.0.0
     :target: https://travis-ci.org/ClearcodeHQ/pytest-mongo
     :alt: Tests
 
-.. image:: https://coveralls.io/repos/ClearcodeHQ/pytest-mongo/badge.png?branch=v1.2.1
-    :target: https://coveralls.io/r/ClearcodeHQ/pytest-mongo?branch=v1.2.1
+.. image:: https://coveralls.io/repos/ClearcodeHQ/pytest-mongo/badge.png?branch=v2.0.0
+    :target: https://coveralls.io/r/ClearcodeHQ/pytest-mongo?branch=v2.0.0
     :alt: Coverage Status
 
 
