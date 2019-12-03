@@ -30,7 +30,7 @@ from pytest_mongo.port import get_port
 def get_config(request):
     """Return a dictionary with config options."""
     config = {}
-    options = ['exec', 'host', 'port', 'params', 'logsdir']
+    options = ['exec', 'host', 'port', 'params', 'logsdir', 'tz_aware']
     for option in options:
         option_name = 'mongo_' + option
         conf = request.config.getoption(option_name) or \
@@ -114,11 +114,12 @@ def mongo_proc(
     return mongo_proc_fixture
 
 
-def mongodb(process_fixture_name):
+def mongodb(process_fixture_name, tz_aware=None):
     """
     Mongo database factory.
 
     :param str process_fixture_name: name of the process fixture
+    :param bool tz_aware: whether the client to be timezone aware or not
     :rtype: func
     :returns: function which makes a connection to mongo
     """
@@ -132,6 +133,13 @@ def mongodb(process_fixture_name):
         :returns: connection to mongo database
         """
         mongodb_process = request.getfixturevalue(process_fixture_name)
+        config = get_config(request)
+        mongo_tz_aware = False
+        if tz_aware is not None:
+            mongo_tz_aware = tz_aware
+        elif config['tz_aware'] is not None \
+                and isinstance(config['tz_aware'], bool):
+            mongo_tz_aware = config['tz_aware']
         if not mongodb_process.running():
             mongodb_process.start()
 
@@ -140,7 +148,10 @@ def mongodb(process_fixture_name):
 
         client = pymongo.MongoClient
 
-        mongo_conn = client(mongo_host, mongo_port)
+        mongo_conn = client(
+            mongo_host, mongo_port,
+            tz_aware=mongo_tz_aware
+        )
 
         yield mongo_conn
 

@@ -27,6 +27,7 @@ _help_logsdir = 'Path to logs directory'
 _help_params = 'Additional MongoDB parameters'
 _help_host = 'Host at which MongoDB will accept connections'
 _help_port = 'Port at which MongoDB will accept connections'
+_help_tz_aware = 'Have mongo client timezone aware'
 
 
 def pytest_addoption(parser):
@@ -59,6 +60,13 @@ def pytest_addoption(parser):
         name='mongo_port',
         help=_help_port,
         default=None,
+    )
+
+    parser.addini(
+        name='mongo_tz_aware',
+        help=_help_tz_aware,
+        type='bool',
+        default=False,
     )
 
     parser.addoption(
@@ -96,6 +104,13 @@ def pytest_addoption(parser):
         action='store',
         dest='mongo_port',
         help=_help_port
+    )
+
+    parser.addoption(
+        '--mongo-tz-aware',
+        action='store',
+        dest='mongo_tz_aware',
+        help=_help_tz_aware
     )
 
 

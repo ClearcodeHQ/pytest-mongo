@@ -32,10 +32,6 @@ Package status
     :target: https://coveralls.io/r/ClearcodeHQ/pytest-mongo?branch=v1.2.1
     :alt: Coverage Status
 
-.. image:: https://requires.io/github/ClearcodeHQ/pytest-mongo/requirements.svg?tag=v1.2.1
-     :target: https://requires.io/github/ClearcodeHQ/pytest-mongo/requirements/?tag=v1.2.1
-     :alt: Requirements Status
-
 
 What is this?
 =============
@@ -111,6 +107,11 @@ You can pick which you prefer, but remember that these settings are handled in t
      - --mongo-params
      - mongo_params
      -
+   * - MongoDB client's time zone awarness
+     - tz_aware
+     - --mongo-tz-aware
+     - tz_aware
+     - False
 
 
 Example usage:
