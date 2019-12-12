@@ -110,7 +110,7 @@ You can pick which you prefer, but remember that these settings are handled in t
    * - MongoDB client's time zone awarness
      - tz_aware
      - --mongo-tz-aware
-     - tz_aware
+     - mongo_tz_aware
      - False
 
 
