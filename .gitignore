@@ -1,5 +1,6 @@
 *.py[cod]
 .cache/*
+venv/
 
 # C extensions
 *.so
