@@ -19,10 +19,13 @@
 import os
 from shutil import rmtree
 from tempfile import gettempdir
+from typing import Callable, Union
 
 import pytest
 import pymongo
 from mirakuru import TCPExecutor
+from _pytest.fixtures import FixtureRequest
+from pytest_mongo.executor_noop import NoopExecutor
 
 from pytest_mongo.port import get_port
 
@@ -114,6 +117,42 @@ def mongo_proc(
     return mongo_proc_fixture
 
 
+def mongo_noproc(
+        host: str = None, port: Union[str, int] = None
+)-> Callable[[FixtureRequest], NoopExecutor]:
+    """
+    MongoDB noprocess factory.
+
+    :param host: hostname
+    :param port: exact port (e.g. '8000', 8000)
+    :param user: MongoDB username
+    :param password: MongoDB password
+    :param options: MongoDB connection options
+    :returns: function which makes a postgresql process
+    """
+
+    @pytest.fixture(scope='session')
+    def mongo_noproc_fixture(request: FixtureRequest) -> NoopExecutor:
+        """
+        Noop Process fixture for MongoDB.
+
+        :param FixtureRequest request: fixture request object
+        :returns: tcp executor-like object
+        """
+        config = get_config(request)
+        mongo_host = host or config['host']
+        mongo_port = port or config['port'] or 27017
+
+        noop_exec = NoopExecutor(
+            host=mongo_host,
+            port=mongo_port
+        )
+
+        yield noop_exec
+
+    return mongo_noproc_fixture
+
+
 def mongodb(process_fixture_name, tz_aware=None):
     """
     Mongo database factory.
@@ -140,8 +179,6 @@ def mongodb(process_fixture_name, tz_aware=None):
         elif config['tz_aware'] is not None \
                 and isinstance(config['tz_aware'], bool):
             mongo_tz_aware = config['tz_aware']
-        if not mongodb_process.running():
-            mongodb_process.start()
 
         mongo_host = mongodb_process.host
         mongo_port = mongodb_process.port
@@ -162,8 +199,9 @@ def mongodb(process_fixture_name, tz_aware=None):
                 # Do not delete any of Mongo "system" collections
                 if not collection.name.startswith('system.'):
                     collection.drop()
+        mongo_conn.close()
 
     return mongodb_factory
 
 
-__all__ = ('mongodb', 'mongo_proc')
+__all__ = ('mongodb', 'mongo_proc', 'mongo_noproc')
