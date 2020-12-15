@@ -17,9 +17,6 @@ class NoopExecutor:  # pylint: disable=too-few-public-methods
 
         :param str host: MongoDB hostname
         :param str|int port: MongoDB port
-        :param str user: MongoDB username
-        :param str user: MongoDB password
-        :param str options: Additional connection options
         """
         self.host = host
         self.port = int(port)
