@@ -1,7 +1,8 @@
 """Test for NoopExecutor."""
 
-from pytest_mongo.executor_noop import NoopExecutor
 import pymongo
+from pytest_mongo.executor_noop import NoopExecutor
+
 
 def test_nooproc_version(mongo_proc):
     """Test the way mongo version is being read."""
@@ -9,7 +10,9 @@ def test_nooproc_version(mongo_proc):
         mongo_proc.host,
         mongo_proc.port
     )
-    proc_client = pymongo.MongoClient(host=mongo_proc.host, port=mongo_proc.port)
+    proc_client = pymongo.MongoClient(
+        host=mongo_proc.host, port=mongo_proc.port
+    )
     assert proc_client.server_info()['version'] == mongo_nooproc.version
 
 

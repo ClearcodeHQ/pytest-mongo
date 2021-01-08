@@ -1,6 +1,6 @@
-
 """MongoDB Noop executor providing connection details for mongodb client."""
 import pymongo
+
 
 class NoopExecutor:  # pylint: disable=too-few-public-methods
     """

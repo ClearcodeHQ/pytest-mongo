@@ -119,7 +119,7 @@ def mongo_proc(
 
 def mongo_noproc(
         host: str = None, port: Union[str, int] = None
-)-> Callable[[FixtureRequest], NoopExecutor]:
+) -> Callable[[FixtureRequest], NoopExecutor]:
     """
     MongoDB noprocess factory.
 
