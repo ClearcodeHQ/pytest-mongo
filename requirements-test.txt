@@ -1,8 +1,8 @@
 # test runs requirements (versions we'll be testing against) - automatically updated by requires.io
-pytest==6.2.0
+pytest==6.2.1
 pytest-cov==2.10.1
-pytest-xdist==2.1.0
-coverage==5.3 # pytest-cov
+pytest-xdist==2.2.0
+coverage==5.3.1 # pytest-cov
 mirakuru==2.3.0
 port-for==0.4
 pymongo==3.11.2
