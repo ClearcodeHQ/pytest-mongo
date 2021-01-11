@@ -115,4 +115,5 @@ def pytest_addoption(parser):
 
 
 mongo_proc = factories.mongo_proc()
+mongo_noproc = factories.mongo_noproc()
 mongodb = factories.mongodb('mongo_proc')

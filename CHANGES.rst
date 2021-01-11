@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+unreleased
+-------
+
+- [feature] Add noproces fixture that can be used along the client to connect to
+  already existing MongoDB instance.
+
 2.0.0
 -------
 
