@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-unreleased
+2.1.0
 -------
 
 - [feature] Add noproces fixture that can be used along the client to connect to
