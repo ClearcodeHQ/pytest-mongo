@@ -1,6 +1,6 @@
 # test runs requirements (versions we'll be testing against) - automatically updated by requires.io
 pytest==6.2.4
-pytest-cov==2.11.1
+pytest-cov==2.12.0
 pytest-xdist==2.2.1
 coverage==5.5 # pytest-cov
 mirakuru==2.3.0
