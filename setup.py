@@ -35,63 +35,46 @@ def read(fname):
     return open(os.path.join(here, fname)).read()
 
 
-requirements = [
-    'pytest>=3.0.0',
-    'pymongo>=3.6',
-    'mirakuru',
-    'port-for'
-]
+requirements = ["pytest>=3.0.0", "pymongo>=3.6", "mirakuru", "port-for"]
 
-test_requires = [
-    'pytest',
-    'pytest-cov',
-    'pytest-xdist'
-]
+test_requires = ["pytest", "pytest-cov", "pytest-xdist"]
 
-extras_require = {
-    'docs': ['sphinx'],
-    'tests': test_requires
-}
+extras_require = {"docs": ["sphinx"], "tests": test_requires}
 
 setup(
-    name='pytest-mongo',
-    version='2.1.0',
-    description='MongoDB process and client fixtures plugin for py.test.',
-    long_description=(
-        read('README.rst') + '\n\n' + read('CHANGES.rst')
-    ),
-    keywords='tests py.test pytest fixture mongo mongodb',
-    author='Clearcode - The A Room',
-    author_email='thearoom@clearcode.cc',
-    url='https://github.com/ClearcodeHQ/pytest-mongo',
-    license='LGPL',
-    python_requires='>=3.6',
+    name="pytest-mongo",
+    version="2.1.0",
+    description="MongoDB process and client fixtures plugin for py.test.",
+    long_description=(read("README.rst") + "\n\n" + read("CHANGES.rst")),
+    keywords="tests py.test pytest fixture mongo mongodb",
+    author="Clearcode - The A Room",
+    author_email="thearoom@clearcode.cc",
+    url="https://github.com/ClearcodeHQ/pytest-mongo",
+    license="LGPL",
+    python_requires=">=3.6",
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
-        'Environment :: Web Environment',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: '
-        'GNU Lesser General Public License v3 or later (LGPLv3+)',
-        'Natural Language :: English',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Topic :: Software Development :: Libraries :: Python Modules',
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: "
+        "GNU Lesser General Public License v3 or later (LGPLv3+)",
+        "Natural Language :: English",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    package_dir={'': 'src'},
-    packages=find_packages('src'),
+    package_dir={"": "src"},
+    packages=find_packages("src"),
     install_requires=requirements,
     tests_require=test_requires,
-    test_suite='tests',
+    test_suite="tests",
     include_package_data=True,
     zip_safe=False,
     extras_require=extras_require,
-    entry_points={
-        'pytest11': [
-            'pytest_mongo = pytest_mongo.plugin'
-        ]},
+    entry_points={"pytest11": ["pytest_mongo = pytest_mongo.plugin"]},
 )

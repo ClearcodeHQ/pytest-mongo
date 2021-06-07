@@ -33,20 +33,17 @@ from pytest_mongo.port import get_port
 def get_config(request):
     """Return a dictionary with config options."""
     config = {}
-    options = ['exec', 'host', 'port', 'params', 'logsdir', 'tz_aware']
+    options = ["exec", "host", "port", "params", "logsdir", "tz_aware"]
     for option in options:
-        option_name = 'mongo_' + option
-        conf = request.config.getoption(option_name) or \
-            request.config.getini(option_name)
+        option_name = "mongo_" + option
+        conf = request.config.getoption(option_name) or request.config.getini(
+            option_name
+        )
         config[option] = conf
     return config
 
 
-def mongo_proc(
-        executable=None, params=None,
-        host=None, port=-1,
-        logsdir=None
-):
+def mongo_proc(executable=None, params=None, host=None, port=-1, logsdir=None):
     """
     Mongo process fixture factory.
 
@@ -66,7 +63,8 @@ def mongo_proc(
     :rtype: func
     :returns: function which makes a mongo process
     """
-    @pytest.fixture(scope='session')
+
+    @pytest.fixture(scope="session")
     def mongo_proc_fixture(request):
         """
         Mongodb process fixture.
@@ -78,21 +76,15 @@ def mongo_proc(
         config = get_config(request)
         tmpdir = gettempdir()
 
-        mongo_exec = executable or config['exec']
-        mongo_params = params or config['params']
+        mongo_exec = executable or config["exec"]
+        mongo_params = params or config["params"]
 
-        mongo_host = host or config['host']
-        mongo_port = get_port(port) or get_port(config['port'])
+        mongo_host = host or config["host"]
+        mongo_port = get_port(port) or get_port(config["port"])
 
-        mongo_logsdir = logsdir or config['logsdir']
-        mongo_logpath = os.path.join(
-            mongo_logsdir,
-            f'mongo.{mongo_port}.log'
-        )
-        mongo_db_path = os.path.join(
-            tmpdir,
-            f'mongo.{mongo_port}'
-        )
+        mongo_logsdir = logsdir or config["logsdir"]
+        mongo_logpath = os.path.join(mongo_logsdir, f"mongo.{mongo_port}.log")
+        mongo_db_path = os.path.join(tmpdir, f"mongo.{mongo_port}")
         os.mkdir(mongo_db_path)
         request.addfinalizer(
             lambda: os.path.exists(mongo_db_path) and rmtree(mongo_db_path)
@@ -100,13 +92,13 @@ def mongo_proc(
 
         mongo_executor = TCPExecutor(
             (
-                f'{mongo_exec} --bind_ip {mongo_host} --port {mongo_port} '
-                f'--dbpath {mongo_db_path} '
-                f'--logpath {mongo_logpath} {mongo_params}'
+                f"{mongo_exec} --bind_ip {mongo_host} --port {mongo_port} "
+                f"--dbpath {mongo_db_path} "
+                f"--logpath {mongo_logpath} {mongo_params}"
             ),
             host=mongo_host,
             port=mongo_port,
-            timeout=60
+            timeout=60,
         )
         mongo_executor.start()
 
@@ -118,7 +110,7 @@ def mongo_proc(
 
 
 def mongo_noproc(
-        host: str = None, port: Union[str, int] = None
+    host: str = None, port: Union[str, int] = None
 ) -> Callable[[FixtureRequest], NoopExecutor]:
     """
     MongoDB noprocess factory.
@@ -131,7 +123,7 @@ def mongo_noproc(
     :returns: function which makes a postgresql process
     """
 
-    @pytest.fixture(scope='session')
+    @pytest.fixture(scope="session")
     def mongo_noproc_fixture(request: FixtureRequest) -> NoopExecutor:
         """
         Noop Process fixture for MongoDB.
@@ -140,13 +132,10 @@ def mongo_noproc(
         :returns: tcp executor-like object
         """
         config = get_config(request)
-        mongo_host = host or config['host']
-        mongo_port = port or config['port'] or 27017
+        mongo_host = host or config["host"]
+        mongo_port = port or config["port"] or 27017
 
-        noop_exec = NoopExecutor(
-            host=mongo_host,
-            port=mongo_port
-        )
+        noop_exec = NoopExecutor(host=mongo_host, port=mongo_port)
 
         yield noop_exec
 
@@ -162,6 +151,7 @@ def mongodb(process_fixture_name, tz_aware=None):
     :rtype: func
     :returns: function which makes a connection to mongo
     """
+
     @pytest.fixture
     def mongodb_factory(request):
         """
@@ -176,19 +166,17 @@ def mongodb(process_fixture_name, tz_aware=None):
         mongo_tz_aware = False
         if tz_aware is not None:
             mongo_tz_aware = tz_aware
-        elif config['tz_aware'] is not None \
-                and isinstance(config['tz_aware'], bool):
-            mongo_tz_aware = config['tz_aware']
+        elif config["tz_aware"] is not None and isinstance(
+            config["tz_aware"], bool
+        ):
+            mongo_tz_aware = config["tz_aware"]
 
         mongo_host = mongodb_process.host
         mongo_port = mongodb_process.port
 
         client = pymongo.MongoClient
 
-        mongo_conn = client(
-            mongo_host, mongo_port,
-            tz_aware=mongo_tz_aware
-        )
+        mongo_conn = client(mongo_host, mongo_port, tz_aware=mongo_tz_aware)
 
         yield mongo_conn
 
@@ -197,11 +185,11 @@ def mongodb(process_fixture_name, tz_aware=None):
             for collection_name in database.list_collection_names():
                 collection = database[collection_name]
                 # Do not delete any of Mongo "system" collections
-                if not collection.name.startswith('system.'):
+                if not collection.name.startswith("system."):
                     collection.drop()
         mongo_conn.close()
 
     return mongodb_factory
 
 
-__all__ = ('mongodb', 'mongo_proc', 'mongo_noproc')
+__all__ = ("mongodb", "mongo_proc", "mongo_noproc")
