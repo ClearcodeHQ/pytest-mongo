@@ -7,6 +7,7 @@ unreleased
 Misc
 ++++
 
+- support only for python 3.7 and up
 - rely on `get_port` functionality delivered by `port_for`
 
 
