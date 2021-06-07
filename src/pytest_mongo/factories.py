@@ -25,9 +25,9 @@ import pytest
 import pymongo
 from mirakuru import TCPExecutor
 from _pytest.fixtures import FixtureRequest
-from pytest_mongo.executor_noop import NoopExecutor
+from port_for import get_port
 
-from pytest_mongo.port import get_port
+from pytest_mongo.executor_noop import NoopExecutor
 
 
 def get_config(request):
