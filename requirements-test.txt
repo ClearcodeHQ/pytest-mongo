@@ -4,6 +4,6 @@ pytest-cov==3.0.0
 pytest-xdist==2.5.0
 coverage==6.3.1 # pytest-cov
 mirakuru==2.4.2
-port-for==0.6.1
+port-for==0.6.2
 pymongo==4.0.1
 -e .[tests]
