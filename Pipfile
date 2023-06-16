@@ -10,7 +10,7 @@ port-for = "==0.6.2"
 pymongo = "==4.3.2"
 
 [dev-packages]
-towncrier = "==22.12"
+towncrier = "==23.6.0"
 pycodestyle = "==2.10.0"
 pydocstyle = "==6.1.1"
 black = "==22.10.0"
