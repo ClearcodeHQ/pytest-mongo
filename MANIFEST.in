@@ -1,4 +1,3 @@
-include *.rst *.py
-recursive-include src/pytest_mongo *.py
-recursive-include docs *
-prune docs/build
+include *.rst pytest_mongo/py.typed
+recursive-include pytest_mongo/*.py
+prune tests/
