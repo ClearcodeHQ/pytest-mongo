@@ -11,8 +11,7 @@ pymongo = "==4.3.3"
 
 [dev-packages]
 towncrier = "==23.6.0"
-pycodestyle = "==2.10.0"
-pydocstyle = "==6.3.0"
 black = "==23.3.0"
 pytest-cov = "==4.0.0"
 pytest-xdist = "==3.0.2"
+ruff = "==0.0.272"

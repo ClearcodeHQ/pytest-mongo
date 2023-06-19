@@ -19,5 +19,4 @@
 """Package definition for pytest-mongo."""
 from setuptools import setup
 
-
 setup()

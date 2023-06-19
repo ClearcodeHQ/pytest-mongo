@@ -3,10 +3,6 @@ name: Run linters
 on:
   push:
     branches: [ main ]
-    paths:
-      - '**.py'
-      - .github/workflows/linters.yml
-      - requirements-lint.txt
   pull_request:
     branches: [ main ]
 
@@ -14,6 +10,5 @@ jobs:
   lint:
     uses: fizyk/actions-reuse/.github/workflows/linters-python.yml@v2.1.2
     with:
-      pydocstyle: true
-      pycodestyle: true
+      ruff: true
       black: true
