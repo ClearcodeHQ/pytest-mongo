@@ -1,6 +1,7 @@
 """Test for NoopExecutor."""
 
 import pymongo
+
 from pytest_mongo.executor_noop import NoopExecutor
 
 

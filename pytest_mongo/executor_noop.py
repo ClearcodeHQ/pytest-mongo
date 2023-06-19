@@ -3,8 +3,7 @@ import pymongo
 
 
 class NoopExecutor:  # pylint: disable=too-few-public-methods
-    """
-    Nooperator executor.
+    """Nooperator executor.
 
     This executor actually does nothing more than provide connection details
     for existing MongoDB server. I.E. one already started either on machine
@@ -12,8 +11,7 @@ class NoopExecutor:  # pylint: disable=too-few-public-methods
     """
 
     def __init__(self, host, port):
-        """
-        Initialize nooperator executor mock.
+        """Initialize nooperator executor mock.
 
         :param str host: MongoDB hostname
         :param str|int port: MongoDB port

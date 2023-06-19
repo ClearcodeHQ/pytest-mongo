@@ -21,10 +21,10 @@ from shutil import rmtree
 from tempfile import gettempdir
 from typing import Callable, Union
 
-import pytest
 import pymongo
-from mirakuru import TCPExecutor
+import pytest
 from _pytest.fixtures import FixtureRequest
+from mirakuru import TCPExecutor
 from port_for import get_port
 
 from pytest_mongo.executor_noop import NoopExecutor
@@ -44,8 +44,7 @@ def get_config(request):
 
 
 def mongo_proc(executable=None, params=None, host=None, port=-1, logsdir=None):
-    """
-    Mongo process fixture factory.
+    """Mongo process fixture factory.
 
     .. note::
         `mongod <http://docs.mongodb.org/v2.2/reference/mongod/>`_
@@ -66,8 +65,7 @@ def mongo_proc(executable=None, params=None, host=None, port=-1, logsdir=None):
 
     @pytest.fixture(scope="session")
     def mongo_proc_fixture(request):
-        """
-        Mongodb process fixture.
+        """Mongodb process fixture.
 
         :param FixtureRequest request: fixture request object
         :rtype: mirakuru.TCPExecutor
@@ -112,8 +110,7 @@ def mongo_proc(executable=None, params=None, host=None, port=-1, logsdir=None):
 def mongo_noproc(
     host: str = None, port: Union[str, int] = None
 ) -> Callable[[FixtureRequest], NoopExecutor]:
-    """
-    MongoDB noprocess factory.
+    """MongoDB noprocess factory.
 
     :param host: hostname
     :param port: exact port (e.g. '8000', 8000)
@@ -125,8 +122,7 @@ def mongo_noproc(
 
     @pytest.fixture(scope="session")
     def mongo_noproc_fixture(request: FixtureRequest) -> NoopExecutor:
-        """
-        Noop Process fixture for MongoDB.
+        """Noop Process fixture for MongoDB.
 
         :param FixtureRequest request: fixture request object
         :returns: tcp executor-like object
@@ -143,8 +139,7 @@ def mongo_noproc(
 
 
 def mongodb(process_fixture_name, tz_aware=None):
-    """
-    Mongo database factory.
+    """Mongo database factory.
 
     :param str process_fixture_name: name of the process fixture
     :param bool tz_aware: whether the client to be timezone aware or not
@@ -154,8 +149,7 @@ def mongodb(process_fixture_name, tz_aware=None):
 
     @pytest.fixture
     def mongodb_factory(request):
-        """
-        Client fixture for MongoDB.
+        """Client fixture for MongoDB.
 
         :param FixtureRequest request: fixture request object
         :rtype: pymongo.connection.Connection
