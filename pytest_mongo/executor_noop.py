@@ -1,5 +1,7 @@
 """MongoDB Noop executor providing connection details for mongodb client."""
-import pymongo
+from typing import Optional
+
+from pymongo import MongoClient
 
 
 class NoopExecutor:  # pylint: disable=too-few-public-methods
@@ -10,21 +12,22 @@ class NoopExecutor:  # pylint: disable=too-few-public-methods
     or with the use of containerisation like kubernetes or docker compose.
     """
 
-    def __init__(self, host, port):
+    def __init__(self, host: str, port: int) -> None:
         """Initialize nooperator executor mock.
 
-        :param str host: MongoDB hostname
-        :param str|int port: MongoDB port
+        :param host: MongoDB hostname
+        :param port: MongoDB port
         """
         self.host = host
-        self.port = int(port)
-        self._version = None
+        self.port = port
+        self._version: Optional[str] = None
 
     @property
-    def version(self):
+    def version(self) -> str:
         """Get MongoDB's version."""
         if not self._version:
-            client = pymongo.MongoClient(host=self.host, port=self.port)
+            client: MongoClient = MongoClient(host=self.host, port=self.port)
             server_info = client.server_info()
             self._version = server_info["version"]
+        assert self._version
         return self._version

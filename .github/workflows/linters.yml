@@ -12,3 +12,4 @@ jobs:
     with:
       ruff: true
       black: true
+      mypy: true

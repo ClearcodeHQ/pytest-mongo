@@ -19,52 +19,41 @@
 import os
 from shutil import rmtree
 from tempfile import gettempdir
-from typing import Callable, Union
+from typing import Callable, Iterator, Optional
 
-import pymongo
 import pytest
-from _pytest.fixtures import FixtureRequest
 from mirakuru import TCPExecutor
 from port_for import get_port
+from port_for.api import PortType
+from pymongo import MongoClient
+from pytest import FixtureRequest
 
+from pytest_mongo.config import get_config
 from pytest_mongo.executor_noop import NoopExecutor
 
 
-def get_config(request):
-    """Return a dictionary with config options."""
-    config = {}
-    options = ["exec", "host", "port", "params", "logsdir", "tz_aware"]
-    for option in options:
-        option_name = "mongo_" + option
-        conf = request.config.getoption(option_name) or request.config.getini(
-            option_name
-        )
-        config[option] = conf
-    return config
-
-
-def mongo_proc(executable=None, params=None, host=None, port=-1, logsdir=None):
+def mongo_proc(
+    executable: Optional[str] = None,
+    params: Optional[str] = None,
+    host: Optional[str] = None,
+    port: Optional[PortType] = -1,
+    logsdir: Optional[str] = None,
+) -> Callable[[FixtureRequest], Iterator[TCPExecutor]]:
     """Mongo process fixture factory.
 
     .. note::
         `mongod <http://docs.mongodb.org/v2.2/reference/mongod/>`_
 
-    :param str executable: path to mongod
-    :param str params: params
-    :param str host: hostname
-    :param str|int|tuple|set|list port:
-        exact port (e.g. '8000', 8000)
-        randomly selected port (None) - any random available port
-        [(2000,3000)] or (2000,3000) - random available port from a given range
-        [{4002,4003}] or {4002,4003} - random of 4002 or 4003 ports
-        [(2000,3000), {4002,4003}] -random of given range and set
-    :param str logsdir: path to store log files.
-    :rtype: func
+    :param executable: path to mongod
+    :param params: params
+    :param host: hostname
+    :param port:
+    :param logsdir: path to store log files.
     :returns: function which makes a mongo process
     """
 
     @pytest.fixture(scope="session")
-    def mongo_proc_fixture(request):
+    def mongo_proc_fixture(request: FixtureRequest) -> Iterator[TCPExecutor]:
         """Mongodb process fixture.
 
         :param FixtureRequest request: fixture request object
@@ -78,15 +67,14 @@ def mongo_proc(executable=None, params=None, host=None, port=-1, logsdir=None):
         mongo_params = params or config["params"]
 
         mongo_host = host or config["host"]
+        assert mongo_host
         mongo_port = get_port(port) or get_port(config["port"])
+        assert mongo_port
 
         mongo_logsdir = logsdir or config["logsdir"]
         mongo_logpath = os.path.join(mongo_logsdir, f"mongo.{mongo_port}.log")
         mongo_db_path = os.path.join(tmpdir, f"mongo.{mongo_port}")
         os.mkdir(mongo_db_path)
-        request.addfinalizer(
-            lambda: os.path.exists(mongo_db_path) and rmtree(mongo_db_path)
-        )
 
         mongo_executor = TCPExecutor(
             (
@@ -98,18 +86,17 @@ def mongo_proc(executable=None, params=None, host=None, port=-1, logsdir=None):
             port=mongo_port,
             timeout=60,
         )
-        mongo_executor.start()
-
-        request.addfinalizer(mongo_executor.stop)
-
-        return mongo_executor
+        with mongo_executor:
+            yield mongo_executor
+        os.path.exists(mongo_db_path)
+        rmtree(mongo_db_path)
 
     return mongo_proc_fixture
 
 
 def mongo_noproc(
-    host: str = None, port: Union[str, int] = None
-) -> Callable[[FixtureRequest], NoopExecutor]:
+    host: Optional[str] = None, port: Optional[int] = None
+) -> Callable[[FixtureRequest], Iterator[NoopExecutor]]:
     """MongoDB noprocess factory.
 
     :param host: hostname
@@ -121,7 +108,7 @@ def mongo_noproc(
     """
 
     @pytest.fixture(scope="session")
-    def mongo_noproc_fixture(request: FixtureRequest) -> NoopExecutor:
+    def mongo_noproc_fixture(request: FixtureRequest) -> Iterator[NoopExecutor]:
         """Noop Process fixture for MongoDB.
 
         :param FixtureRequest request: fixture request object
@@ -130,6 +117,7 @@ def mongo_noproc(
         config = get_config(request)
         mongo_host = host or config["host"]
         mongo_port = port or config["port"] or 27017
+        assert mongo_port
 
         noop_exec = NoopExecutor(host=mongo_host, port=mongo_port)
 
@@ -138,7 +126,9 @@ def mongo_noproc(
     return mongo_noproc_fixture
 
 
-def mongodb(process_fixture_name, tz_aware=None):
+def mongodb(
+    process_fixture_name: str, tz_aware: Optional[bool] = None
+) -> Callable[[FixtureRequest], Iterator[MongoClient]]:
     """Mongo database factory.
 
     :param str process_fixture_name: name of the process fixture
@@ -148,7 +138,7 @@ def mongodb(process_fixture_name, tz_aware=None):
     """
 
     @pytest.fixture
-    def mongodb_factory(request):
+    def mongodb_factory(request: FixtureRequest) -> Iterator[MongoClient]:
         """Client fixture for MongoDB.
 
         :param FixtureRequest request: fixture request object
@@ -168,9 +158,9 @@ def mongodb(process_fixture_name, tz_aware=None):
         mongo_host = mongodb_process.host
         mongo_port = mongodb_process.port
 
-        client = pymongo.MongoClient
-
-        mongo_conn = client(mongo_host, mongo_port, tz_aware=mongo_tz_aware)
+        mongo_conn: MongoClient = MongoClient(
+            mongo_host, mongo_port, tz_aware=mongo_tz_aware
+        )
 
         yield mongo_conn
 
