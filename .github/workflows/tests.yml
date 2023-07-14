@@ -25,11 +25,9 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install MongoDB
-      run: |
-        wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-        echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
-        sudo apt-get update -o Dir::Etc::sourcelist="/etc/apt/sources.list.d/mongodb.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"
-        sudo apt-get install -y mongodb-org
+      uses: ankane/setup-mongodb@v1
+      with:
+        mongodb-version: 6.0
     - name: Run test
       uses: fizyk/actions-reuse/.github/actions/pipenv@v2.1.2
       with:
