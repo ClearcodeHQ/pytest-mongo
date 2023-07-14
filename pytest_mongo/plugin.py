@@ -19,6 +19,8 @@
 """Pytest-mongo plugin definition."""
 from tempfile import gettempdir
 
+from pytest import Parser
+
 from pytest_mongo import factories
 
 # pylint:disable=invalid-name
@@ -30,7 +32,7 @@ _help_port = "Port at which MongoDB will accept connections"
 _help_tz_aware = "Have mongo client timezone aware"
 
 
-def pytest_addoption(parser):
+def pytest_addoption(parser: Parser) -> None:
     """Configure pytest-mongo configuration options."""
     parser.addini(
         name="mongo_exec", help=_help_executable, default="/usr/bin/mongod"
