@@ -138,7 +138,7 @@ Example usage:
 
 * use ``--mongo-port`` command line option when you run your tests
 
-    .. code-block::
+    .. code-block:: sh
 
         py.test tests --mongo-port=8888
 
