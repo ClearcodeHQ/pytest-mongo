@@ -3,6 +3,28 @@ CHANGELOG
 
 .. towncrier release notes start
 
+3.0.0 (2023-07-20)
+==================
+
+Breaking changes
+----------------
+
+- Dropped support for python 3.7 (`#384 <https://github.com/ClearcodeHQ/pytest-mongo/issues/384>`__)
+
+
+Features
+--------
+
+- Add typing and check types on CI (`#384 <https://github.com/ClearcodeHQ/pytest-mongo/issues/384>`__)
+- Officially support python 3.11 (`#385 <https://github.com/ClearcodeHQ/pytest-mongo/issues/385>`__)
+
+
+Miscellaneus
+------------
+
+- `#379 <https://github.com/ClearcodeHQ/pytest-mongo/issues/379>`__, `#380 <https://github.com/ClearcodeHQ/pytest-mongo/issues/380>`__, `#381 <https://github.com/ClearcodeHQ/pytest-mongo/issues/381>`__, `#382 <https://github.com/ClearcodeHQ/pytest-mongo/issues/382>`__, `#383 <https://github.com/ClearcodeHQ/pytest-mongo/issues/383>`__, `#386 <https://github.com/ClearcodeHQ/pytest-mongo/issues/386>`__, `#394 <https://github.com/ClearcodeHQ/pytest-mongo/issues/394>`__, `#419 <https://github.com/ClearcodeHQ/pytest-mongo/issues/419>`__
+
+
 2.1.1
 =====
 
