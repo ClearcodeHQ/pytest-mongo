@@ -1,5 +1,5 @@
 Contribute to pytest-mongo
-==============
+==========================
 
 Thank you for taking time to contribute to pytest-mongo!
 
