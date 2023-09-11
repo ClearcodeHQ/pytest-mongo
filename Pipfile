@@ -17,4 +17,4 @@ pytest-xdist = "==3.3.1"
 ruff = "==0.0.287"
 mypy = "==1.5.1"
 tbump = "==6.11.0"
-rstcheck = {version = "==6.1.2", extras = ["sphinx"]}
+rstcheck = {version = "==6.2.0", extras = ["sphinx"]}
