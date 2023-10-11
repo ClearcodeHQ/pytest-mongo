@@ -15,6 +15,6 @@ black = "==23.9.1"
 pytest-cov = "==4.1.0"
 pytest-xdist = "==3.3.1"
 ruff = "==0.0.292"
-mypy = "==1.5.1"
+mypy = "==1.6.0"
 tbump = "==6.11.0"
 rstcheck = {version = "==6.2.0", extras = ["sphinx"]}
