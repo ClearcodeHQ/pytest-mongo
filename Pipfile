@@ -11,7 +11,7 @@ pymongo = "==4.6.1"
 
 [dev-packages]
 towncrier = "==23.11.0"
-black = "==23.11.0"
+black = "==23.12.0"
 pytest-cov = "==4.1.0"
 pytest-xdist = "==3.5.0"
 ruff = "==0.1.7"
