@@ -14,7 +14,7 @@ towncrier = "==23.11.0"
 black = "==23.12.1"
 pytest-cov = "==4.1.0"
 pytest-xdist = "==3.5.0"
-ruff = "==0.1.12"
+ruff = "==0.1.13"
 mypy = "==1.8.0"
 tbump = "==6.11.0"
 rstcheck = {version = "==6.2.0", extras = ["sphinx"]}
