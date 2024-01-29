@@ -1,4 +1,5 @@
 """Tests main conftest file."""
+
 from pytest_mongo import factories
 from pytest_mongo.plugin import *  # noqa: F403
 

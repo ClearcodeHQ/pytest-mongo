@@ -1,4 +1,5 @@
 """MongoDB Noop executor providing connection details for mongodb client."""
+
 from typing import Optional
 
 from pymongo import MongoClient

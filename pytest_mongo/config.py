@@ -1,4 +1,5 @@
 """Mongo config getter."""
+
 from pathlib import Path
 from typing import Any, Optional, TypedDict
 
