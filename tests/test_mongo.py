@@ -1,4 +1,5 @@
 """pytest-mongo tests collection."""
+
 import os
 
 from mirakuru import TCPExecutor
