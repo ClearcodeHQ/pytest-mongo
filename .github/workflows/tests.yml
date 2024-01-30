@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        python-version: [3.8, 3.9, "3.10", "3.11", pypy-3.8]
+        python-version: [3.8, 3.9, "3.10", "3.11", pypy-3.9]
     env:
       OS: ubuntu-latest
       PYTHON: ${{ matrix.python-version }}
@@ -32,13 +32,11 @@ jobs:
       uses: fizyk/actions-reuse/.github/actions/pipenv@v2.4.2
       with:
         python-version: ${{ matrix.python-version }}
-        pipenv-install-options: "--skip-lock"
         command: pytest -n 0 --cov-report=xml
     - name: Run xdist test
       uses: fizyk/actions-reuse/.github/actions/pipenv@v2.4.2
       with:
         python-version: ${{ matrix.python-version }}
-        pipenv-install-options: "--skip-lock"
         command: pytest -n 1 --cov-report=xml:coverage-xdist.xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3.1.5
