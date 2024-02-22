@@ -7,7 +7,7 @@ name = "pypi"
 pytest = "==8.0.1"
 mirakuru = "==2.5.2"
 port-for = "==0.7.2"
-pymongo = "==4.6.1"
+pymongo = "==4.6.2"
 
 [dev-packages]
 towncrier = "==23.11.0"
