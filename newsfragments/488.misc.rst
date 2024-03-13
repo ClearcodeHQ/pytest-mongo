@@ -1,1 +1,0 @@
-Skip Pipfile.lock from repository, and rely instead on the one cached on CI or in Artifacts.

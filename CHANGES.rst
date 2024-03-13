@@ -3,6 +3,21 @@ CHANGELOG
 
 .. towncrier release notes start
 
+3.1.0 (2024-03-13)
+==================
+
+Features
+--------
+
+- Support Python 3.12 (`#507 <https://github.com/ClearcodeHQ/pytest-mongo/issues/507>`__)
+
+
+Miscellaneus
+------------
+
+- `#486 <https://github.com/ClearcodeHQ/pytest-mongo/issues/486>`__, `#488 <https://github.com/ClearcodeHQ/pytest-mongo/issues/488>`__, `#508 <https://github.com/ClearcodeHQ/pytest-mongo/issues/508>`__
+
+
 3.0.0 (2023-07-20)
 ==================
 

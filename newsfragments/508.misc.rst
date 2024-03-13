@@ -1,1 +1,0 @@
-Test against MongoDB 7 as well as 6.
