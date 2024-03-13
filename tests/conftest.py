@@ -4,7 +4,7 @@ from pytest_mongo import factories
 from pytest_mongo.plugin import *  # noqa: F403
 
 # pylint:disable=invalid-name
-mongo_params = "--nojournal --noauth"
+mongo_params = "--noauth"
 
 mongo_proc2 = factories.mongo_proc(port=27070, params=mongo_params)
 mongodb2 = factories.mongodb("mongo_proc2")
