@@ -7,13 +7,21 @@ on:
     branches: [ main ]
 
 jobs:
+  mongo_8:
+    uses: ./.github/workflows/single-mongo.yml
+    with:
+      mongo: 8.0
   mongo_7:
+    needs: [mongo_8]
     uses: ./.github/workflows/single-mongo.yml
     with:
       mongo: 7.0
+      os: ubuntu-22.04
+      python-versions: '["3.9", "3.10", "3.11", "3.12"]'
   mongo_6:
-#    needs: [mongo_7]
+    needs: [mongo_8]
     uses: ./.github/workflows/single-mongo.yml
     with:
       mongo: 6.0
-      python-versions: '["3.9", "3.10", "3.11", "3.12"]'
+      os: ubuntu-22.04
+      python-versions: '["3.11", "3.12"]'
